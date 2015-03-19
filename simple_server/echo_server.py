@@ -5,6 +5,7 @@ from twisted.internet import reactor
 class Echo(Protocol):
 
     def dataReceived(self, data):
+        print data
         self.transport.write(data)
 
 class Quote(Protocol):
@@ -32,9 +33,10 @@ class CountedEcho(Protocol):
         self.transport.write(data)
 
 class QOTFactory(Factory):
+    numProtocols = 0
 
     def buildProtocol(self, addr):
-        return Quote()
+        return CountedEcho(self)
 
 
 endpoint = TCP4ServerEndpoint(reactor, 8007)
