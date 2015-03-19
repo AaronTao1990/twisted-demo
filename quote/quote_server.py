@@ -3,9 +3,6 @@ from twisted.internet import reactor
 
 class QuoteProtocol(Protocol):
 
-    def __init__(self, factory):
-        self.factory = factory
-
     def dataReceived(self, data):
         print '%d connections connected for now' % (self.factory.numConnections, )
         print '> received : %s> response : %s' % (data, self.getQuote())
@@ -28,12 +25,10 @@ class QuoteProtocol(Protocol):
 
 class QuoteFactory(Factory):
     numConnections = 0
+    protocol = QuoteProtocol
 
     def __init__(self, quote=None):
         self.quote = quote or "An apple a day keeps doctor away"
-
-    def buildProtocol(self, addr):
-        return QuoteProtocol(self)
 
 reactor.listenTCP(8000, QuoteFactory())
 reactor.run()
