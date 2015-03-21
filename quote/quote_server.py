@@ -9,7 +9,6 @@ class QuoteProtocol(Protocol):
         self.transport.write(self.getQuote())
         self.updateQuote(data)
 
-
     def connectionMade(self):
         self.factory.numConnections += 1
 
