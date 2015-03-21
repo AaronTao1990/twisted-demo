@@ -72,10 +72,10 @@ def main(options):
 
 if __name__ == '__main__':
     parser = optparse.OptionParser('')
-    parser.add_option('--caddr', help=help, default='localhost')
-    parser.add_option('--cport', help=help, type=int)
-    parser.add_option('--saddr', help=help, default='localhost')
-    parser.add_option('--sport', help=help, type=int)
+    parser.add_option('--caddr', help='client addr', default='localhost')
+    parser.add_option('--cport', help='client port', type=int)
+    parser.add_option('--saddr', help='server addr', default='localhost')
+    parser.add_option('--sport', help='server port', type=int)
 
     options, args = parser.parse_args()
     main(options)
